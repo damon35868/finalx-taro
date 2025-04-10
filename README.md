@@ -1,9 +1,7 @@
-## [文档地址](https://finalx.vercel.app)（正在更新中）
-
-<h2 align="center">FinalX</h2>
+<h1 align="center">FinalX</h1>
 <p align="center">基于Taro、React打造的一款跨端开发的工具及组件库</p>
 
-## 使用
+## 使用 [文档地址](https://finalx.vercel.app)（正在更新中）
 
 ### Installation 安装
 
