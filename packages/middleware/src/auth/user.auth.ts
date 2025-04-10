@@ -1,4 +1,4 @@
-import { getItem, setUserAuth, config, TFilterKey, getMiddlewareData } from "@finalx/common";
+import { config, getItem, getMiddlewareData, setUserAuth, TFilterKey } from "@finalx/common";
 import { LocalStorageKeys } from "../enums";
 import { BaseAuth } from "./base.auth";
 
@@ -8,7 +8,7 @@ class UserAuth extends BaseAuth {
   }
 
   private get filterKey() {
-    return config.middleware?.userAuth.filterKey || ["name", "mobilePhone"];
+    return config?.middleware?.userAuth?.filterKey || ["name", "mobilePhone"];
   }
 
   private get filterData() {

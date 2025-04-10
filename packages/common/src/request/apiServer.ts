@@ -1,7 +1,7 @@
 import { request } from "@tarojs/taro";
-import { getItem } from "../utils";
-import { LocalStorageKeys } from "../enums";
 import { config } from "../config";
+import { LocalStorageKeys } from "../enums";
+import { getItem } from "../utils";
 
 interface requestProps {
   url?: string;

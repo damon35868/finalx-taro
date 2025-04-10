@@ -1,7 +1,7 @@
 import { log as logHandler } from "../log";
-import { configTypes, middlewareConfigType, requestConfigType } from "./types";
-import { config } from "./instance";
 import { wsClient } from "../ws";
+import { config } from "./instance";
+import { configTypes, middlewareConfigType, requestConfigType } from "./types";
 export { config } from "./instance";
 export * from "./types";
 
@@ -34,9 +34,7 @@ function middlewareConfig(middleware: middlewareConfigType | undefined) {
   config.log && logHandler.success("[配置中间件成功]");
 }
 
-export function globalConfig(configVal: configTypes) {
-  const { request, middleware, log } = configVal || {};
-
+export function globalConfig({ request, middleware, log }: configTypes) {
   Object.assign(config, { log });
   middlewareConfig(middleware);
   requestConfig(request);

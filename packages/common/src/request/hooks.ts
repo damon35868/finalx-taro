@@ -1,10 +1,10 @@
 import { request } from "@tarojs/taro";
 import { useRequest as useQuery } from "taro-hooks";
 import { BaseOptions, BaseResult, LoadMoreOptions, PaginatedOptionsWithFormat } from "taro-hooks/dist/useRequest/types";
-import { getItem } from "../utils";
-import { LocalStorageKeys } from "../enums";
 import { config } from "../config";
+import { LocalStorageKeys } from "../enums";
 import { useUserState } from "../hooks";
+import { getItem } from "../utils";
 
 export interface requestOptions {
   url?: string;
