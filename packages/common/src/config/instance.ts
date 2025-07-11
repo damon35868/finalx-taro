@@ -1,12 +1,12 @@
-import { configTypes, middlewareConfigType, requestConfigType } from "./types";
+import { IComponentConfig, IConfig, IMiddlewareConfig, IRequestConfig } from "./types";
 
-class Config implements configTypes {
+class Config implements IConfig {
   public log: boolean = false;
-  public middleware: middlewareConfigType = {
+  public middleware: IMiddlewareConfig = {
     userAuth: {},
     roleAuth: {}
   };
-  public request: requestConfigType = {
+  public request: IRequestConfig = {
     host: "",
     path: "",
     wsUrl: "",
@@ -18,6 +18,19 @@ class Config implements configTypes {
     wsEventKey: {
       eventKey: "EventName",
       dataKey: "Data"
+    }
+  };
+
+  public component?: IComponentConfig = {
+    wrapperOffset: {
+      top: "0rpx",
+      bottom: "120rpx"
+    },
+    noContentImage: "",
+    navBarBackIcon: {
+      el: null,
+      lightIcon: "",
+      darkIcon: ""
     }
   };
 }

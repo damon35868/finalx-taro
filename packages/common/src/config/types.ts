@@ -1,10 +1,12 @@
-export interface configTypes {
+import { ReactElement } from "react";
+export interface IConfig {
   log?: boolean;
-  request?: requestConfigType;
-  middleware?: middlewareConfigType;
+  component?: IComponentConfig;
+  request?: IRequestConfig;
+  middleware?: IMiddlewareConfig;
 }
 
-export interface requestConfigType {
+export interface IRequestConfig {
   host?: string;
   path?: string;
   baseUrl?: string;
@@ -33,7 +35,7 @@ export interface requestConfigType {
 
 export type TFilterKey = string | ({ key: string; rule?: (val: any, key: string) => boolean } | string)[];
 
-export interface middlewareConfigType {
+export interface IMiddlewareConfig {
   userAuth?: {
     data?: Object | string;
     filterKey?: TFilterKey;
@@ -42,5 +44,18 @@ export interface middlewareConfigType {
   roleAuth?: {
     data?: Object | string;
     filterKey?: TFilterKey;
+  };
+}
+
+export interface IComponentConfig {
+  wrapperOffset?: {
+    top?: string;
+    bottom?: string;
+  };
+  noContentImage?: string;
+  navBarBackIcon?: {
+    el?: ReactElement;
+    lightIcon?: string;
+    darkIcon?: string;
   };
 }

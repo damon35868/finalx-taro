@@ -1,6 +1,6 @@
-import React, { CSSProperties, FC } from "react";
+import { config, useSystem, useSystemSize } from "@finalx/common";
 import { View } from "@tarojs/components";
-import { useSystem, useSystemSize } from "@finalx/common";
+import React, { CSSProperties, FC } from "react";
 import "./index.scss";
 
 interface WrapperProps {
@@ -9,17 +9,32 @@ interface WrapperProps {
   bgColor?: string;
   style?: CSSProperties;
   children?: any;
+  fullScreen?: boolean;
+  offset?: { top?: string; bottom?: string };
 }
 
-export const Wrapper: FC<WrapperProps> = ({ space = true, bottomSpace, children, bgColor, style = {} }) => {
+export const Wrapper: FC<WrapperProps> = ({
+  space = true,
+  fullScreen = true,
+  bottomSpace,
+  children,
+  bgColor,
+  style = {},
+  offset = { top: config?.component?.wrapperOffset?.top || "0rpx", bottom: config?.component?.wrapperOffset?.bottom || "120rpx" }
+}) => {
   const { customNavHeight } = useSystemSize();
+  const { top = "0rpx", bottom = "120rpx" } = offset || {};
+
+  const topOffset = `${customNavHeight}PX + ${top}`;
+  const bottomOffset = `(env(safe-area-inset-bottom) + ${bottom})`;
 
   return (
     <View
       style={{
         backgroundColor: bgColor || "",
-        paddingTop: space ? customNavHeight + 10 + "PX" : "",
-        paddingBottom: bottomSpace ? "calc(env(safe-area-inset-bottom) + 120rpx)" : "",
+        paddingTop: space ? `calc(${topOffset})` : "",
+        paddingBottom: bottomSpace ? `calc(${bottomOffset})` : "",
+        ...(fullScreen ? { minHeight: `calc(100vh - ${space ? topOffset : "0rpx"} - ${bottomSpace ? bottomOffset : "0rpx"})` } : {}),
         ...style
       }}
     >
@@ -30,11 +45,12 @@ export const Wrapper: FC<WrapperProps> = ({ space = true, bottomSpace, children,
 
 interface BottomWrapperProps {
   children?: any;
+  bgColor?: string;
   height?: string;
   wrapperStyle?: CSSProperties;
   style?: CSSProperties;
 }
-export const BottomWrapper: FC<BottomWrapperProps> = ({ height = "106rpx", wrapperStyle = {}, style = {}, children }) => {
+export const BottomWrapper: FC<BottomWrapperProps> = ({ height = "106rpx", bgColor, wrapperStyle = {}, style = {}, children }) => {
   const { system } = useSystem();
   const isAndroid = system === "android";
 
@@ -44,6 +60,7 @@ export const BottomWrapper: FC<BottomWrapperProps> = ({ height = "106rpx", wrapp
         className='bottom-wrapper-content'
         style={{
           height,
+          backgroundColor: bgColor || "",
           paddingBottom: isAndroid ? "calc(env(safe-area-inset-bottom) + 10px)" : "env(safe-area-inset-bottom)",
           ...style
         }}

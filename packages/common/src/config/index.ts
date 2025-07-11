@@ -1,7 +1,8 @@
 import { log as logHandler } from "../log";
 import { wsClient } from "../ws";
 import { config } from "./instance";
-import { configTypes, middlewareConfigType, requestConfigType } from "./types";
+import { IComponentConfig, IConfig, IMiddlewareConfig, IRequestConfig } from "./types";
+
 export { config } from "./instance";
 export * from "./types";
 
@@ -17,7 +18,7 @@ function ensureHttps(url: string) {
   return url;
 }
 
-function requestConfig(reqConfig: requestConfigType | undefined) {
+function requestConfig(reqConfig?: IRequestConfig) {
   if (typeof reqConfig !== "object") return;
 
   const { host, path, baseUrl = ensureHttps(host) + path } = reqConfig;
@@ -27,17 +28,25 @@ function requestConfig(reqConfig: requestConfigType | undefined) {
   if (reqConfig.wsUrl) wsClient.init();
 }
 
-function middlewareConfig(middleware: middlewareConfigType | undefined) {
+function middlewareConfig(middleware?: IMiddlewareConfig) {
   if (typeof middleware !== "object") return;
 
   Object.assign(config, { middleware });
   config.log && logHandler.success("[配置中间件成功]");
 }
 
-export function globalConfig({ request, middleware, log }: configTypes) {
+function componentConfig(component?: IComponentConfig) {
+  if (typeof component !== "object") return;
+
+  Object.assign(config, { component });
+  config.log && logHandler.success("[配置组件库成功]");
+}
+
+export function globalConfig({ request, middleware, component, log }: IConfig) {
   Object.assign(config, { log });
   middlewareConfig(middleware);
   requestConfig(request);
+  componentConfig(component);
 
   Object.freeze(config);
   config.log && logHandler.success("[全局配置完成，已冻结配置文件]", config);
