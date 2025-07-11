@@ -50,7 +50,13 @@ interface BottomWrapperProps {
   wrapperStyle?: CSSProperties;
   style?: CSSProperties;
 }
-export const BottomWrapper: FC<BottomWrapperProps> = ({ height = "106rpx", bgColor, wrapperStyle = {}, style = {}, children }) => {
+export const BottomWrapper: FC<BottomWrapperProps> = ({
+  height = config?.component?.wrapperOffset?.bottom || "120rpx",
+  bgColor,
+  wrapperStyle = {},
+  style = {},
+  children
+}) => {
   const { system } = useSystem();
   const isAndroid = system === "android";
 
