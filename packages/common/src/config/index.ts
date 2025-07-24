@@ -1,22 +1,11 @@
 import { log as logHandler } from "../log";
+import { ensureHttps } from "../utils";
 import { wsClient } from "../ws";
 import { config } from "./instance";
 import { IComponentConfig, IConfig, IMiddlewareConfig, IRequestConfig } from "./types";
 
 export { config } from "./instance";
 export * from "./types";
-
-function ensureHttps(url: string) {
-  // 正则表达式匹配以 'http://' 或 'https://' 开头的 URL
-  const regex = /^(http:\/\/|https:\/\/)/;
-
-  // 如果 URL 没有 'http://' 或 'https://' 前缀，则添加 'https://'
-  if (!regex.test(url)) {
-    url = "https://" + url;
-  }
-
-  return url;
-}
 
 function requestConfig(reqConfig?: IRequestConfig) {
   if (typeof reqConfig !== "object") return;

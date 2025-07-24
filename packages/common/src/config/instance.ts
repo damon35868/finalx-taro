@@ -22,16 +22,10 @@ class Config implements IConfig {
   };
 
   public component?: IComponentConfig = {
-    wrapperOffset: {
-      top: "0rpx",
-      bottom: "120rpx"
-    },
+    wrapperOffset: { top: "0rpx", bottom: "120rpx" },
     noContentImage: "",
-    navBarBackIcon: {
-      el: null,
-      lightIcon: "",
-      darkIcon: ""
-    }
+    navBarBackIcon: { el: null, lightIcon: "", darkIcon: "" },
+    map: {}
   };
 }
 

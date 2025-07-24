@@ -33,8 +33,6 @@ export interface IRequestConfig {
   };
 }
 
-export type TFilterKey = string | ({ key: string; rule?: (val: any, key: string) => boolean } | string)[];
-
 export interface IMiddlewareConfig {
   userAuth?: {
     data?: Object | string;
@@ -58,4 +56,20 @@ export interface IComponentConfig {
     lightIcon?: string;
     darkIcon?: string;
   };
+  map?: IMapConfig;
 }
+
+export interface IMapConfig {
+  mapSDK?: any;
+  key?: string; // 腾讯地图key
+  center?: { latitude?: number; longitude?: number }; // 地图中心位置
+  distance?: number; // 默认判断范围距离->米
+  scale?: { scale?: number; minScale?: number; maxScale?: number }; // 默认缩放
+  bounds?: {
+    //地图边界范围
+    southwest?: { latitude?: number; longitude?: number };
+    northeast?: { latitude?: number; longitude?: number };
+  };
+}
+
+export type TFilterKey = string | ({ key: string; rule?: (val: any, key: string) => boolean } | string)[];

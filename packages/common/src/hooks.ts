@@ -1,9 +1,9 @@
-import { unstable_batchedUpdates } from "react-dom";
+import { getMenuButtonBoundingClientRect, getSystemInfo, useDidShow, useReachBottom as useOriginReachBottom } from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useDidShow, getSystemInfo, useReachBottom as useOriginReachBottom, getMenuButtonBoundingClientRect } from "@tarojs/taro";
-import { WsEventFunc, wsClient } from "./ws";
+import { unstable_batchedUpdates } from "react-dom";
 import { pageSizeStore } from "./pageStore";
-import { authStore, platformStore, systemInfoStore, initStore, systemInfoStateType } from "./state";
+import { authStore, initStore, platformStore, systemInfoStateType, systemInfoStore } from "./state";
+import { WsEventFunc, wsClient } from "./ws";
 
 /**
  * 页面触底无限滚动

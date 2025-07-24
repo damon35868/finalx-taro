@@ -35,8 +35,7 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
         const { codeHandler, rejectHandler } = errorRule || {};
 
         if (codeHandler) {
-          const status = codeHandler(statusCode);
-          if (!status) return resolve(resp);
+          if (!codeHandler(statusCode)) return resolve(resp);
         } else {
           if (statusCode === 200) return resolve(resp);
         }

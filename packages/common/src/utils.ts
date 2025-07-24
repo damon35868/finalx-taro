@@ -1,4 +1,4 @@
-import { clearStorageSync, getStorageSync, removeStorageSync, setStorageSync, reLaunch, showToast, uploadFile, navigateBack } from "@tarojs/taro";
+import { clearStorageSync, getStorageSync, navigateBack, reLaunch, removeStorageSync, setStorageSync, showToast, uploadFile } from "@tarojs/taro";
 import { LocalStorageKeys } from "./enums";
 
 /**
@@ -73,6 +73,17 @@ export function getQueryVariable(query: string, variable: string, isExclude?: bo
   if (variable && !isExclude) return undefined;
   return { query: decodeURIComponent(vars.join("&")) };
 }
+
+/**
+ * @description: 休眠
+ * @param {number} second 秒
+ * @return {*}
+ */
+export const sleep = (second: number) => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(0), second * 1000);
+  });
+};
 
 /**
  * @description: 数字转中文数字
@@ -279,4 +290,21 @@ export function clearRichText(text: string = "") {
 export function formatDateByString(time: string) {
   const repTime = time.replace(/-/g, "/");
   return Date.parse(repTime) / 1000; //转时间戳
+}
+
+/**
+ * @description: 填补http前缀
+ * @param {string} url
+ * @return {*}
+ */
+export function ensureHttps(url: string) {
+  // 正则表达式匹配以 'http://' 或 'https://' 开头的 URL
+  const regex = /^(http:\/\/|https:\/\/)/;
+
+  // 如果 URL 没有 'http://' 或 'https://' 前缀，则添加 'https://'
+  if (!regex.test(url)) {
+    url = "https://" + url;
+  }
+
+  return url;
 }

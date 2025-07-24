@@ -1,12 +1,12 @@
-import { config } from "./config";
-import { ErrorCode } from "./enums";
-import { toast } from "./utils";
+import { config } from "../config";
+import { ErrorCode } from "../enums";
+import { sleep, toast } from "../utils";
 
 /**
  * @description: 全局帮助类
  * @return {*}
  */
-class Helper {
+class HttpHelper {
   // 重试次数
   private timeoutCount: number = 0;
   // 重试最大次数
@@ -14,7 +14,15 @@ class Helper {
 
   /**
    * @description: 统一请求执行，包含错误处理
-   * @return {*}
+   * @param {Object} config - 请求配置对象
+   * @param {Function} config.apiFn - 需要执行的异步API函数，应返回Promise
+   * @param {string} [config.text] - 请求加载时显示的提示文本（可选）
+   * @param {string} [config.errorText] - 请求失败时显示的错误提示文本（可选）
+   * @param {Function} [config.callback] - 请求成功后的回调函数，接收响应结果作为参数（可选）
+   * @param {Function} [config.onError] - 请求失败时的自定义错误处理函数（可选）
+   * @param {boolean} [config.showToast=true] - 是否显示错误提示（默认true）
+   * @param {Function} [config.rule] - 自定义响应验证规则函数，返回boolean决定是否认为请求成功（可选）
+   * @return {Promise<any>}
    */
   async run({
     apiFn,
@@ -81,14 +89,21 @@ class Helper {
   }
 
   /**
-   * @description: 接口重试方法
-   * @return {*}
+   * @description: 接口重试方法 [支持自定义重试规则、延迟和最大重试次数]
+   * @param {Object} config - 重试配置对象
+   * @param {number} [config.delay=0] - 重试间隔时间（毫秒），默认0（立即重试）
+   * @param {number} [config.maxCount=this.maxCount] - 最大重试次数，默认使用实例的maxCount
+   * @param {Function} config.callback - 需要重试的异步回调函数，应返回Promise
+   * @param {Function} [config.rule] - 自定义重试条件函数，返回boolean决定是否需要重试（可选）
+   * @return {Promise<any>}
    */
   retry({
     rule,
     callback,
+    delay = 0,
     maxCount = this.maxCount
   }: {
+    delay?: number;
     maxCount?: number;
     callback: (val?: any) => Promise<any>;
     rule?: (val?: any) => boolean;
@@ -110,6 +125,8 @@ class Helper {
         } catch (e) {
           this.timeoutCount++;
           console.log(`[--重试第${this.timeoutCount}次--]`);
+
+          await sleep(delay);
           if (this.timeoutCount >= maxCount) reject(new Error("重试次数达到上限"));
         }
       } while (this.timeoutCount <= maxCount);
@@ -117,4 +134,4 @@ class Helper {
   }
 }
 
-export const helper = new Helper();
+export const httpHelper = new HttpHelper();
