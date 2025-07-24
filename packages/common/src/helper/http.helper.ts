@@ -120,7 +120,7 @@ class HttpHelper {
           const status = rule ? rule(data) : true;
           if (!status) throw new Error("返回值不符合要求");
 
-          this.timeoutCount = maxCount + 1;
+          this.abortRetry(maxCount);
           resove({ msg: "重试成功", data });
         } catch (e) {
           this.timeoutCount++;
@@ -131,6 +131,15 @@ class HttpHelper {
         }
       } while (this.timeoutCount <= maxCount);
     });
+  }
+
+  /**
+   * @description: 终止重试函数
+   * @param {*} maxCount 当前最大重试次数
+   * @return {*}
+   */
+  abortRetry(maxCount = this.maxCount) {
+    this.timeoutCount = maxCount + 1;
   }
 }
 

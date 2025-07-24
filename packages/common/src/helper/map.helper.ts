@@ -3,7 +3,7 @@ import { config } from "../config";
 
 const mapConfig = config.component.map;
 type Coordinate = { lat: number; lng: number };
-class MapService {
+class MapHelper {
   // 判断是否在园区的距离 米
   private distance = mapConfig.distance;
 
@@ -65,7 +65,7 @@ class MapService {
           show && console.log("[--位置信息--]", result);
           const { location } = result || {};
 
-          const { scope } = await mapService.calcScope({
+          const { scope } = await this.calcScope({
             current: { lat: location.lat, lng: location.lng },
             target: { lat: mapConfig.center.latitude, lng: mapConfig.center.longitude }
           });
@@ -121,18 +121,17 @@ class MapService {
   }
 
   private rad(d) {
-    return (d * Math.PI) / 180.0; //经纬度转换成三角函数中度分表形式。
+    return (d * Math.PI) / 180.0;
   }
 
   public calculateBearing({ current, target }: { target: Coordinate; current: Coordinate }) {
-    let dx = target.lat - current.lat;
-    let dy = target.lng - current.lng;
-    let angle = Math.atan2(dy, dx) * (180 / Math.PI); // 转换为角度
+    const dx = target.lat - current.lat;
+    const dy = target.lng - current.lng;
+    let angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
-    if (angle < 0) angle += 360; // 确保角度为正
-
+    if (angle < 0) angle += 360;
     return angle;
   }
 }
 
-export const mapService = new MapService();
+export const mapHelper = new MapHelper();
