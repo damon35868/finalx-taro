@@ -1,6 +1,6 @@
-import React, { FC, ReactElement, useEffect, useImperativeHandle, useState, CSSProperties } from "react";
-import classNames from "classnames";
 import { View } from "@tarojs/components";
+import classNames from "classnames";
+import React, { CSSProperties, FC, ReactElement, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 
 interface ModalProps {
@@ -35,7 +35,10 @@ export const Modal: FC<ModalProps> = ({
   useEffect(() => setContentStatus(status), [status]);
   const close = () => {
     setContentStatus(false);
-    setTimeout(() => setStatus(arg || false), 150);
+    setTimeout(() => {
+      setStatus(arg || false);
+      onClose && onClose();
+    }, 150);
   };
 
   useImperativeHandle(cRef, () => ({ close }));
