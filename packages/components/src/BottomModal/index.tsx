@@ -1,6 +1,6 @@
-import React, { ReactNode, FC, CSSProperties, useEffect } from "react";
-import classNames from "classnames";
 import { View } from "@tarojs/components";
+import classNames from "classnames";
+import React, { CSSProperties, FC, ReactNode } from "react";
 import "./index.scss";
 
 interface BottomModalProps {
