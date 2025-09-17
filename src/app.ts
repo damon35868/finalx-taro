@@ -1,20 +1,18 @@
-import { useEffect } from 'react'
-import { RecoilRoot } from 'recoil'
-import {
-  login as miniProgramLogin,
-  getAccountInfoSync,
-  showLoading,
-  hideLoading,
-} from '@tarojs/taro'
-import RecoilNexus from 'recoil-nexus'
-import { useSystemInfo, toast, useUserState, wsClient } from '@finalx/common'
+import { toast, useSystemInfo, useUserState } from '@finalx/common'
 import '@finalx/components/dist/style.css'
+import {
+  getAccountInfoSync,
+  hideLoading,
+  login as miniProgramLogin,
+  showLoading,
+} from '@tarojs/taro'
+import { useEffect } from 'react'
 import { login } from './api/user'
 import './app.scss'
 // import { WSEvent } from './common/enums'
 import '../global.config'
 
-export default function App(props: any) {
+export default function App({ children }) {
   useSystemInfo()
   const { setUserState } = useUserState()
 
@@ -47,10 +45,5 @@ export default function App(props: any) {
     })()
   }, [])
 
-  return (
-    <RecoilRoot>
-      <RecoilNexus />
-      {props.children}
-    </RecoilRoot>
-  )
+  return children
 }
