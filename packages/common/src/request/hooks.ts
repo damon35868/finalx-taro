@@ -23,7 +23,10 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
       method,
       timeout: config.request?.timeout,
       header: {
-        authorization: (config.request?.bearerToken ? "Bearer " : "") + (token || getItem(LocalStorageKeys.token) || null),
+        authorization:
+          token || getItem(LocalStorageKeys.token)
+            ? (config.request?.bearerToken ? "Bearer " : "") + (token || getItem(LocalStorageKeys.token))
+            : undefined,
         ...(config.request?.header || {})
       }
     })

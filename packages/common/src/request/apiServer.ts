@@ -23,7 +23,7 @@ export function apiServer({ url, data, method = "POST", coverUrl }: requestProps
       timeout: config.request?.timeout,
       url: coverUrl || config.request?.baseUrl + (url || ""),
       header: {
-        authorization: (config.request?.bearerToken ? "Bearer " : "") + getItem(LocalStorageKeys.token) || null,
+        authorization: getItem(LocalStorageKeys.token) ? (config.request?.bearerToken ? "Bearer " : "") + getItem(LocalStorageKeys.token) : undefined,
         ...(config.request?.header || {})
       },
       success: res => {

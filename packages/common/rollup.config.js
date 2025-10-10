@@ -1,9 +1,13 @@
-import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
-import { terser } from "rollup-plugin-terser";
-import external from "rollup-plugin-peer-deps-external";
+import { createRequire } from "node:module";
 import dts from "rollup-plugin-dts";
+import external from "rollup-plugin-peer-deps-external";
+import { terser } from "rollup-plugin-terser";
+const require = createRequire(import.meta.url);
+const pkg = require("./package.json");
 
 export default [
   {
@@ -14,7 +18,18 @@ export default [
       sourcemap: true,
       name: "finalx-common-esm"
     },
-    plugins: [external(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
+    plugins: [
+      replace({
+        values: {
+          __VERSION__: JSON.stringify(pkg.version)
+        },
+        preventAssignment: true
+      }),
+      external(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      terser()
+    ],
     external: ["react", "react-dom", "@tarojs/taro", "@tarojs/components"]
   },
   {
@@ -24,7 +39,19 @@ export default [
       format: "cjs",
       sourcemap: true
     },
-    plugins: [external(), resolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
+    plugins: [
+      replace({
+        values: {
+          __VERSION__: JSON.stringify(pkg.version)
+        },
+        preventAssignment: true
+      }),
+      external(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      terser()
+    ],
     external: ["react", "react-dom", "@tarojs/taro", "@tarojs/components"]
   },
   {
