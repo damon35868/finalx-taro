@@ -1,6 +1,6 @@
 {
   "name": "@finalx/common",
-  "version": "1.4.6",
+  "version": "1.4.6-beta",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
