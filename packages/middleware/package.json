@@ -1,6 +1,6 @@
 {
   "name": "@finalx/middleware",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.22.5",
-    "@finalx/common": "^1.4.5",
+    "@finalx/common": "^1.4.6",
     "@rollup/plugin-typescript": "^11.1.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
