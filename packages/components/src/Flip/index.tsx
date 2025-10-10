@@ -1,16 +1,15 @@
-import React from "react";
-import { FC, ReactNode } from "react";
-import classNames from "classnames";
-import "./index.scss";
 import { View } from "@tarojs/components";
+import classNames from "classnames";
+import React, { FC, ReactNode } from "react";
+import "./index.scss";
 
-interface FlipProps {
+export interface IFlipProps {
   front: ReactNode;
   back: ReactNode;
   model: [boolean, Function];
   props?: any;
 }
-export const Flip: FC<FlipProps> = ({ front, back, model, ...props }) => {
+export const Flip: FC<IFlipProps> = ({ front, back, model, ...props }) => {
   const [reverse, setReverse]: [boolean, Function] = model;
 
   return (

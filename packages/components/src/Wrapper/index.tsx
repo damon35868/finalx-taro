@@ -3,7 +3,7 @@ import { View } from "@tarojs/components";
 import React, { CSSProperties, FC } from "react";
 import "./index.scss";
 
-interface WrapperProps {
+export interface IWrapperProps {
   space?: boolean;
   bottomSpace?: boolean;
   bgColor?: string;
@@ -13,7 +13,7 @@ interface WrapperProps {
   offset?: { top?: string; bottom?: string };
 }
 
-export const Wrapper: FC<WrapperProps> = ({
+export const Wrapper: FC<IWrapperProps> = ({
   space = true,
   fullScreen = true,
   bottomSpace,
@@ -43,14 +43,14 @@ export const Wrapper: FC<WrapperProps> = ({
   );
 };
 
-interface BottomWrapperProps {
+export interface IBottomWrapperProps {
   children?: any;
   bgColor?: string;
   height?: string;
   wrapperStyle?: CSSProperties;
   style?: CSSProperties;
 }
-export const BottomWrapper: FC<BottomWrapperProps> = ({
+export const BottomWrapper: FC<IBottomWrapperProps> = ({
   height = config?.component?.wrapperOffset?.bottom || "120rpx",
   bgColor,
   wrapperStyle = {},

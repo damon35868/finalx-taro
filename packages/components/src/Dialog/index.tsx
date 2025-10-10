@@ -1,10 +1,9 @@
-import React from "react";
-import { FC, ReactElement, useRef } from "react";
-import { Modal } from "../Modal";
 import { Button, View } from "@tarojs/components";
+import React, { FC, ReactElement, useRef } from "react";
+import { Modal } from "../Modal";
 import "./index.scss";
 
-interface DialogProps {
+export interface IDialogProps {
   status: boolean;
   content: {
     title: string;
@@ -17,7 +16,7 @@ interface DialogProps {
   onClick?: (close: any) => any;
 }
 
-export const Dialog: FC<DialogProps> = ({ status, setStatus, content, onClick, onCancel }) => {
+export const Dialog: FC<IDialogProps> = ({ status, setStatus, content, onClick, onCancel }) => {
   const { title, desc, btnText } = content;
   const ref = useRef<{ close: Function }>();
 

@@ -126,7 +126,7 @@ class HttpHelper {
           resove({ msg: "重试成功", data });
         } catch (e) {
           this.timeoutCount++;
-          if (this.timeoutCount >= maxCount) reject(new Error("重试次数达到上限"));
+          if (this.timeoutCount >= maxCount) reject(new Error("重试次数已达到上限"));
           console.log(`[--重试第${this.timeoutCount}次--]`);
         }
       } while (this.timeoutCount <= maxCount);

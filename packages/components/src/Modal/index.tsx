@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React, { CSSProperties, FC, ReactElement, useEffect, useImperativeHandle, useState } from "react";
 import "./index.scss";
 
-interface ModalProps {
+export interface IModalProps {
   status: boolean;
   setStatus: Function;
   onClose?: () => any;
@@ -17,7 +17,7 @@ interface ModalProps {
   contentStyle?: CSSProperties;
 }
 
-export const Modal: FC<ModalProps> = ({
+export const Modal: FC<IModalProps> = ({
   status,
   setStatus,
   closeOnClickModal = true,

@@ -9,6 +9,7 @@ import { getItem } from "../utils";
 export interface requestOptions {
   url?: string;
   coverUrl?: string;
+  coverOption?: boolean;
   method?: string;
   data?: any;
   token?: string;
@@ -46,7 +47,7 @@ const asyncFn = ({ url, data, method, token }: { url: string; data: any; method:
 };
 
 export const useRequest = (
-  { url, data, method = "POST", coverUrl }: requestOptions,
+  { url, data, method = "POST", coverUrl, coverOption }: requestOptions,
   options?: PaginatedOptionsWithFormat<any, any, any> | BaseOptions<any, any> | LoadMoreOptions<any>
 ): BaseResult<any, any> => {
   const { token: reqToken } = useUserState();
@@ -64,6 +65,14 @@ export const useRequest = (
         url: httpUrl || coverUrl || String(config.request?.baseUrl) + url
       });
     },
-    { ...(options as any), ready: reqToken && !!config.request?.baseUrl && ((options || {}).hasOwnProperty("ready") ? options.ready : true) }
+    coverOption
+      ? options || {}
+      : {
+          ...(options as any),
+          ready:
+            !!config.request?.baseUrl &&
+            (config?.request?.tokenCheck ? reqToken : true) &&
+            ((options || {}).hasOwnProperty("ready") ? options.ready : true)
+        }
   );
 };

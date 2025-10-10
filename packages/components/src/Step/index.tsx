@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC, ReactElement, isValidElement } from "react";
 import { View } from "@tarojs/components";
+import React, { CSSProperties, FC, ReactElement, isValidElement } from "react";
 import "./index.scss";
 
-interface IStepProps {
+export interface IStepProps {
   proportion?: number | string;
   activeColor?: string;
   slotColor?: string;

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React, { CSSProperties, FC, ReactNode } from "react";
 import "./index.scss";
 
-interface BottomModalProps {
+export interface BottomModalProps {
   status: boolean;
   setStatus?: (state: boolean) => any;
   onClose?: () => any;

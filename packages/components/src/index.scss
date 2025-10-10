@@ -1,0 +1,21 @@
+@mixin ellipsis-text($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+.ellipsis-text-1 {
+  @include ellipsis-text(1);
+}
+
+.ellipsis-text-2 {
+  @include ellipsis-text(2);
+}
+
+.ellipsis-text-3 {
+  @include ellipsis-text(3);
+}

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import React, { CSSProperties, FC, ReactElement, isValidElement, memo, useState } from "react";
 import "./index.scss";
 
-interface NavBarProps {
+export interface INavBarProps {
   title?: string | null | ReactElement;
   style?: CSSProperties;
   icon?: ReactElement | { lightIcon?: string; darkIcon?: string };
@@ -17,7 +17,7 @@ interface NavBarProps {
   onScrollShow?: (scrollShowStatus: boolean) => void;
 }
 
-export const NavBar: FC<NavBarProps> = memo(
+export const NavBar: FC<INavBarProps> = memo(
   ({ title = "", scrollShow, onBack, showBack = true, icon, theme = "dark", style = {}, scrollStyle, onScrollShow }) => {
     const [top, setTop] = useState(0);
     const isScroll = top >= 110;

@@ -3,7 +3,7 @@ import { Image, View } from "@tarojs/components";
 import React, { CSSProperties, FC } from "react";
 import "./index.scss";
 
-interface NoContentProps {
+export interface INoContentProps {
   model: any;
   text?: string;
   style?: CSSProperties;
@@ -13,7 +13,7 @@ interface NoContentProps {
   textColor?: string;
 }
 
-export const NoContent: FC<NoContentProps> = ({ model, text, textColor = "", color = "", style = {}, lineStyle = {}, textStyle = {} }) => {
+export const NoContent: FC<INoContentProps> = ({ model, text, textColor = "", color = "", style = {}, lineStyle = {}, textStyle = {} }) => {
   const { data } = model || {};
   const { hasNextPage = true } = data || {};
 
@@ -30,7 +30,7 @@ export const NoContent: FC<NoContentProps> = ({ model, text, textColor = "", col
   );
 };
 
-interface NoContentRectProps {
+export interface INoContentRectProps {
   model: any;
   text?: string;
   src?: string;
@@ -39,7 +39,7 @@ interface NoContentRectProps {
   imgStyle?: CSSProperties;
   children?: any;
 }
-export const NoContentRect: FC<NoContentRectProps> = ({
+export const NoContentRect: FC<INoContentRectProps> = ({
   model,
   text,
   src = config?.component?.noContentImage || "",

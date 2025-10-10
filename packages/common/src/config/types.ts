@@ -14,6 +14,7 @@ export interface IRequestConfig {
   header?: any;
   timeout?: number;
   bearerToken?: boolean;
+  tokenCheck?: boolean;
   wsUrl?: string;
   wsPing?: boolean;
   wsAck?: boolean;

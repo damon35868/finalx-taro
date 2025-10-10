@@ -12,6 +12,7 @@ class Config implements IConfig {
     wsUrl: "",
     baseUrl: "",
     timeout: 300000,
+    tokenCheck: true,
     wsCheckUser: true,
     wsPing: true,
     wsAck: true,
@@ -25,7 +26,7 @@ class Config implements IConfig {
     wrapperOffset: { top: "0rpx", bottom: "120rpx" },
     noContentImage: "",
     navBarBackIcon: { el: null, lightIcon: "", darkIcon: "" },
-    map: {}
+    map: { key: "" }
   };
 }
 

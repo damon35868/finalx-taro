@@ -1,21 +1,21 @@
 import { View } from "@tarojs/components";
 import React, { FC, ReactElement, useEffect, useRef, useState } from "react";
 
-interface timeType {
+export interface ITimeType {
   day: number | string;
   hour: number | string;
   minute: number | string;
   second: number | string;
 }
-interface CountTimeDownProps {
+export interface ICountTimeDownProps {
   endTime: number;
   onFinish?: Function;
-  children?: (time: timeType) => ReactElement;
+  children?: (time: ITimeType) => ReactElement;
 }
 
-export const CountTimeDown: FC<CountTimeDownProps> = ({ endTime, onFinish, children }) => {
+export const CountTimeDown: FC<ICountTimeDownProps> = ({ endTime, onFinish, children }) => {
   const timer = useRef<any>();
-  const [time, setTime] = useState<timeType>({
+  const [time, setTime] = useState<ITimeType>({
     day: 0,
     hour: 0,
     minute: 0,

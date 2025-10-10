@@ -12,3 +12,4 @@ export * from "./NoContent";
 export * from "./Radar";
 export * from "./Step";
 export * from "./Wrapper";
+import "./index.scss";
