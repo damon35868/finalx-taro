@@ -1,4 +1,4 @@
-import { getMenuButtonBoundingClientRect, getSystemInfo, useDidShow, useReachBottom as useOriginReachBottom } from "@tarojs/taro";
+import { getDeviceInfo, getMenuButtonBoundingClientRect, getWindowInfo, useDidShow, useReachBottom as useOriginReachBottom } from "@tarojs/taro";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import { pageSizeStore } from "./pageStore";
@@ -99,33 +99,30 @@ export function useSystemInfo() {
   const { setSystemSize } = useSystemSize();
 
   useEffect(() => {
-    getSystemInfo({
-      success(systemInfo: any): any {
-        setSystemSize(systemInfo);
-        setSystem(systemInfo.platform);
+    const { platform } = getDeviceInfo();
+    let { statusBarHeight, windowHeight, screenHeight, windowWidth, screenWidth } = getWindowInfo();
+    setSystem(platform);
+    setSystemSize({ statusBarHeight, windowHeight, screenHeight, windowWidth, screenWidth });
 
-        let { statusBarHeight, windowHeight, screenHeight, windowWidth, screenWidth } = systemInfo;
-        try {
-          const { top, bottom } = getMenuButtonBoundingClientRect();
-          if (top === bottom || top === 0 || bottom === 0 || statusBarHeight === 0) {
-            tryGetDeviceInfoCount = tryGetDeviceInfoCount - 1;
-            if (tryGetDeviceInfoCount < 0) throw new Error();
-            return getSystemInfo();
-          }
-          const paddingTop = top - statusBarHeight;
-          windowHeight = screenHeight - bottom - paddingTop;
-        } catch (e) {
-          windowHeight = screenHeight - 68;
-        }
-
-        setSystemSize({
-          windowHeight,
-          statusBarHeight,
-          screenHeight,
-          windowWidth,
-          screenWidth
-        });
+    try {
+      const { top, bottom } = getMenuButtonBoundingClientRect();
+      if (top === bottom || top === 0 || bottom === 0 || statusBarHeight === 0) {
+        tryGetDeviceInfoCount = tryGetDeviceInfoCount - 1;
+        if (tryGetDeviceInfoCount < 0) throw new Error();
+        return getWindowInfo();
       }
+      const paddingTop = top - statusBarHeight;
+      windowHeight = screenHeight - bottom - paddingTop;
+    } catch (e) {
+      windowHeight = screenHeight - 68;
+    }
+
+    setSystemSize({
+      windowHeight,
+      statusBarHeight,
+      screenHeight,
+      windowWidth,
+      screenWidth
     });
   }, []);
 }
