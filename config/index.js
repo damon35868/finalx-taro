@@ -1,8 +1,8 @@
 import { resolve } from 'path'
 
 const config = {
-  projectName: '',
-  date: '2024-04-29',
+  projectName: 'miniprogram',
+  date: '',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,

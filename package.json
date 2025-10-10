@@ -1,5 +1,5 @@
 {
-  "name": "lingyin-miniprogram",
+  "name": "miniprogram",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -26,9 +26,9 @@
   "author": "",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@finalx/common": "^1.4.3",
-    "@finalx/components": "^1.4.3",
-    "@finalx/middleware": "^1.4.3",
+    "@finalx/common": "^1.4.5",
+    "@finalx/components": "^1.4.5",
+    "@finalx/middleware": "^1.4.5",
     "@fower/core": "^2.1.3",
     "@fower/taro": "^2.1.3",
     "@tarojs/cli": "3.6.11",
