@@ -1,11 +1,11 @@
 import { getLocation } from "@tarojs/taro";
 import { config } from "../config";
 
-const mapConfig = config.component.map;
+const mapConfig = config?.component?.map;
 type Coordinate = { lat: number; lng: number };
 class MapHelper {
   // 判断是否在园区的距离 米
-  private distance = mapConfig.distance;
+  private distance = mapConfig?.distance;
 
   //计算两个经纬度之间距离
   public async calcScope({

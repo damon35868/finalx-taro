@@ -7,13 +7,26 @@ class Config implements IConfig {
     roleAuth: {}
   };
   public request: IRequestConfig = {
+    host: "",
+    path: "",
+    wsUrl: "",
+    baseUrl: "",
     timeout: 300000,
     tokenCheck: true,
-    wsCheckUser: true
+    wsCheckUser: true,
+    wsPing: true,
+    wsAck: true,
+    wsEventKey: {
+      eventKey: "EventName",
+      dataKey: "Data"
+    }
   };
 
   public component?: IComponentConfig = {
-    wrapperOffset: { top: "0rpx", bottom: "120rpx" }
+    wrapperOffset: { top: "0rpx", bottom: "120rpx" },
+    noContentImage: "",
+    navBarBackIcon: { el: null, lightIcon: "", darkIcon: "" },
+    map: { key: "" }
   };
 }
 
