@@ -71,7 +71,7 @@ export const useRequest = (
           ...(options as any),
           ready:
             !!config.request?.baseUrl &&
-            (config?.request?.tokenCheck ? reqToken : true) &&
+            (config?.request?.tokenCheck ? !!reqToken : true) &&
             ((options || {}).hasOwnProperty("ready") ? options.ready : true)
         }
   );
