@@ -1,7 +1,7 @@
 import { IComponentConfig, IConfig, IMiddlewareConfig, IRequestConfig } from "./types";
 
 class Config implements IConfig {
-  public log: boolean = false;
+  public log: boolean = true;
   public middleware: IMiddlewareConfig = {
     userAuth: {},
     roleAuth: {}
