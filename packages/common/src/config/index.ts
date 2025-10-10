@@ -6,13 +6,6 @@ import { IComponentConfig, IConfig, IMiddlewareConfig, IRequestConfig } from "./
 export { config } from "./instance";
 export * from "./types";
 
-import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
-const pkg = require("../package.json");
-
-export const VERSION = pkg.version;
-
 function logCheck(action: string | (() => any), data?: any) {
   if (!config?.log) return;
 
@@ -46,7 +39,6 @@ function componentConfig(component?: IComponentConfig) {
 
 export function globalConfig({ request, middleware, component, log }: IConfig) {
   Object.assign(config, { log: typeof log === "boolean" ? log : config?.log });
-  logCheck(() => logHandler.warn(`[FinalX V${VERSION}]`));
   middlewareConfig(middleware);
   requestConfig(request);
   componentConfig(component);
